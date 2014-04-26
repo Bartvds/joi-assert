@@ -28,6 +28,7 @@ describe('bake', function () {
 	});
 
 	describe('error', function () {
+
 		it('basic', function () {
 			var schema = Joi.string();
 			var assertion = joiAssert.bake(schema);

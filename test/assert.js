@@ -194,6 +194,27 @@ describe('assert', function () {
 					}, schema);
 				}, 'hoge(2) foo must be a string, bar must be a string');
 			});
+
+			it('multi many', function () {
+				var strReq = Joi.string().required();
+				var schema = Joi.object({
+					value0: strReq,
+					value1: strReq,
+					value2: strReq,
+					value3: strReq,
+					value4: strReq,
+					value5: strReq,
+					value6: strReq,
+					value8: strReq,
+					value9: strReq
+				}).options({
+					abortEarly: false
+				}).description('hoge');
+
+				assert.throws(function () {
+					joiAssert({}, schema);
+				}, 'hoge(9) value0 is required, value1 is required, value2 is required, value3 is required... (showing 4 of 9)');
+			});
 		});
 	});
 });
