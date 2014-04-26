@@ -1,23 +1,11 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-mocha-test');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		clean: {
-			dist: [
-				'dist/**/*'
-			],
-			tmp: [
-				'tmp/**/*'
-			],
-			test: [
-				'test/tmp/**/*'
-			]
-		},
 		jshint: {
 			options: grunt.util._.extend(grunt.file.readJSON('.jshintrc'), {
 				reporter: './node_modules/jshint-path-reporter'
@@ -43,9 +31,6 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('prep', [
-		'clean:tmp',
-		'clean:dist',
-		'clean:test',
 		'jshint:support'
 	]);
 	grunt.registerTask('build', [
