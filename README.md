@@ -21,10 +21,10 @@ $ npm install joi-assert
 
 ````js
 var Joi = require('joi');
-var JoiAssert = require('joi-assert');
+var joiAssert = require('joi-assert');
 
-var schema = Joice.string().min(5);
-JoiAssert.assert(myValue, schema);
+var schema = joi.string().min(5);
+joiAssert(myValue, schema);
 ````
 
 ### Validate input
@@ -38,21 +38,21 @@ var schema = Joi.object({
 	stripUnknown: true
 });
 
-// some dirty input
+// valid but dirty input data
 var raw = {
 	foo: 'abc',
 	zip: 123
 }
-// pass
-var data = JoiAssert(raw, schema);
+// pass through
+var data = joiAssert(raw, schema);
 
 // data is now
 {
 	foo: 'abc',
 	bar: 'hoge'
 }
-
 ````
+
 
 
 ## Build

@@ -3,7 +3,7 @@
 var Joi = require('joi');
 var assert = require('chai').assert;
 
-var JoiAssert = require('../index');
+var joiAssert = require('../index');
 
 describe('assert', function () {
 
@@ -14,14 +14,14 @@ describe('assert', function () {
 			it('basic', function () {
 				var schema = Joi.string();
 				var input = 'abc';
-				JoiAssert(input, schema);
+				joiAssert(input, schema);
 			});
 
 			it('return valid', function () {
 				var schema = Joi.string();
 				var input = 'abc';
 
-				var actual = JoiAssert(input, schema);
+				var actual = joiAssert(input, schema);
 				assert.strictEqual(actual, input);
 			});
 		});
@@ -31,7 +31,7 @@ describe('assert', function () {
 				var schema = Joi.string();
 
 				assert.throws(function () {
-					JoiAssert(123, schema);
+					joiAssert(123, schema);
 				}, 'string: value must be a string');
 			});
 
@@ -39,7 +39,7 @@ describe('assert', function () {
 				var schema = Joi.string();
 
 				assert.throws(function () {
-					JoiAssert(123, schema, 'my test');
+					joiAssert(123, schema, 'my test');
 				}, 'my test: string: value must be a string');
 			});
 		});
@@ -56,7 +56,7 @@ describe('assert', function () {
 				var input = {
 					foo: 'abc'
 				};
-				JoiAssert(input, schema);
+				joiAssert(input, schema);
 			});
 
 			it('return value', function () {
@@ -66,7 +66,7 @@ describe('assert', function () {
 				var input = {
 					foo: 'abc'
 				};
-				var actual = JoiAssert(input, schema);
+				var actual = joiAssert(input, schema);
 				assert.deepEqual(actual, input);
 			});
 
@@ -83,7 +83,7 @@ describe('assert', function () {
 				var expected = {
 					foo: 'abc'
 				};
-				var actual = JoiAssert(input, schema);
+				var actual = joiAssert(input, schema);
 				assert.deepEqual(actual, expected);
 			});
 		});
@@ -94,7 +94,7 @@ describe('assert', function () {
 					foo: Joi.string()
 				});
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: 123
 					}, schema);
 				}, 'object: foo must be a string');
@@ -106,7 +106,7 @@ describe('assert', function () {
 				}).description('hoge');
 
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: 123
 					}, schema);
 				}, 'hoge: foo must be a string');
@@ -120,7 +120,7 @@ describe('assert', function () {
 				}).description('hoge');
 
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: {
 							buzz: 123
 						}
@@ -137,7 +137,7 @@ describe('assert', function () {
 				});
 
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: 123,
 						bar: 123
 					}, schema);
@@ -153,7 +153,7 @@ describe('assert', function () {
 				}).description('hoge');
 
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: 123,
 						bar: 123
 					}, schema);
@@ -169,7 +169,7 @@ describe('assert', function () {
 				});
 
 				assert.throws(function () {
-					JoiAssert({
+					joiAssert({
 						foo: 123,
 						bar: 123
 					}, schema, 'my test');
