@@ -68,7 +68,7 @@ var data = joiAssert(raw, schema);
 }
 ````
 
-### Bake a assertion function
+### Bake assertion function
 
 ````js
 var schema = Joi.string().min(5).max(10);
