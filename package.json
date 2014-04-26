@@ -37,10 +37,10 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "joi": "^4.0.0",
     "assertion-error": "^1.0.0"
   },
   "devDependencies": {
+    "joi": "^4.0.0",
     "grunt": "~0.4.2",
     "mocha-unfunk-reporter": "^0.4.0",
     "grunt-contrib-jshint": "^0.10.0",
