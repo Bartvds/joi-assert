@@ -4,11 +4,11 @@
 
 > Assert values using Joi schemas
 
-Use Spumko's [Joi](https://github.com/spumko/joi) in assertion statements that validate values.
+Use Spumko's [Joi](https://github.com/spumko/joi) in assertion statements that validate and sanitize values.
 
-Assertions return the validated value or throw an [AssertionError](https://github.com/chaijs/assertion-error) with a compact, readable message. 
+Assertions throw an [AssertionError](https://github.com/chaijs/assertion-error) with a compact, readable message if validation fails. This makes Joi schemas usable in assertions for use with frameworks like [mocha](https://visionmedia.github.io/mocha/). 
 
-This makes Joi schemas usable as input-assertions in the methods of user facing APIs, and as assertion library for use with frameworks like [mocha](https://visionmedia.github.io/mocha/). 
+If validation succeeds the sanitized value returned, via Joi's support for default values and unknown property stripping etc. This makes Joi schemas usable as input-assertions in the methods of user facing methods of your modules and APIs.
 
 :warning: Early phase so users beware.
 
@@ -35,23 +35,29 @@ var schema = Joi.string().min(5);
 
 // validate data and throw AssertionError on failure
 joiAssert(raw, schema);
+
+// assertion returns valid data as oneliner
+var valid = joiAssert(raw, schema);
 ````
 
-### Validate input
+### Error message
 
 ````js
-// assertion returns valid data as one-liner
-var valid = joiAssert(raw, schema);
-```
+// add schema description to error message
+var schema = Joi.string().min(5).description('lower bound');
+
+// additonal message per call
+input = joiAssert(imput, schema, 'input check');
+````
 
 ### Validate *and* sanitize input
 
 ````js
+// get a schema using default(), .stripUnknown etc
 var schema = Joi.object({
 	foo: Joi.string().required(),
 	bar: Joi.string().optional().default('hoge')
 }).object({
-	allowUnknown: true,
 	stripUnknown: true
 });
 
@@ -73,12 +79,18 @@ var data = joiAssert(raw, schema);
 ### Bake assertion function
 
 ````js
+// get a schema
 var schema = Joi.string().min(5).max(10);
+
+// get assertion closure
 var fiveTen = joiAssert.bake(schema, 'five to ten');
 
 // nice
 fiveTen(10);
 fiveTen(5);
+
+// clean
+input = fiveTen(input);
 
 // kablam!
 fiveTen(20);
@@ -86,6 +98,16 @@ fiveTen(20);
 // get fancy
 var clean = [5, 6, 7, 8].map(fiveTen);
 ````
+
+## Todo
+
+* Improve vars argument
+	* Support argument as Object, Array and String
+	* Consider sprintf style smart args (order etc)
+	* Test it 
+* Add options to customise error message:
+	* Amount of concatenated reports
+	* Multiline message
 
 ## Build
 
