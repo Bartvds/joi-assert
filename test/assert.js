@@ -14,6 +14,7 @@ describe('assert', function () {
 			it('basic', function () {
 				var schema = Joi.string();
 				var input = 'abc';
+
 				joiAssert(input, schema);
 			});
 
@@ -29,17 +30,19 @@ describe('assert', function () {
 		describe('error', function () {
 			it('single basic', function () {
 				var schema = Joi.string();
+				var input = 123;
 
 				assert.throws(function () {
-					joiAssert(123, schema);
+					joiAssert(input, schema);
 				}, 'string: value must be a string');
 			});
 
 			it('single message', function () {
 				var schema = Joi.string();
+				var input = 123;
 
 				assert.throws(function () {
-					joiAssert(123, schema, 'my test');
+					joiAssert(input, schema, 'my test');
 				}, 'my test: string: value must be a string');
 			});
 		});
@@ -56,6 +59,7 @@ describe('assert', function () {
 				var input = {
 					foo: 'abc'
 				};
+
 				joiAssert(input, schema);
 			});
 
@@ -66,6 +70,7 @@ describe('assert', function () {
 				var input = {
 					foo: 'abc'
 				};
+
 				var actual = joiAssert(input, schema);
 				assert.deepEqual(actual, input);
 			});
@@ -83,6 +88,7 @@ describe('assert', function () {
 				var expected = {
 					foo: 'abc'
 				};
+
 				var actual = joiAssert(input, schema);
 				assert.deepEqual(actual, expected);
 			});
@@ -93,11 +99,24 @@ describe('assert', function () {
 				var schema = Joi.object({
 					foo: Joi.string()
 				});
+
 				assert.throws(function () {
 					joiAssert({
 						foo: 123
 					}, schema);
 				}, 'object: foo must be a string');
+			});
+
+			it('single message', function () {
+				var schema = Joi.object({
+					foo: Joi.string()
+				});
+
+				assert.throws(function () {
+					joiAssert({
+						foo: 123
+					}, schema, 'my test');
+				}, 'my test: object: foo must be a string');
 			});
 
 			it('single described', function () {
@@ -144,22 +163,6 @@ describe('assert', function () {
 				}, 'object(2) foo must be a string, bar must be a string');
 			});
 
-			it('multi described', function () {
-				var schema = Joi.object({
-					foo: Joi.string(),
-					bar: Joi.string()
-				}).options({
-					abortEarly: false
-				}).description('hoge');
-
-				assert.throws(function () {
-					joiAssert({
-						foo: 123,
-						bar: 123
-					}, schema);
-				}, 'hoge(2) foo must be a string, bar must be a string');
-			});
-
 			it('multi message', function () {
 				var schema = Joi.object({
 					foo: Joi.string(),
@@ -174,6 +177,22 @@ describe('assert', function () {
 						bar: 123
 					}, schema, 'my test');
 				}, 'my test: object(2) foo must be a string, bar must be a string');
+			});
+
+			it('multi described', function () {
+				var schema = Joi.object({
+					foo: Joi.string(),
+					bar: Joi.string()
+				}).options({
+					abortEarly: false
+				}).description('hoge');
+
+				assert.throws(function () {
+					joiAssert({
+						foo: 123,
+						bar: 123
+					}, schema);
+				}, 'hoge(2) foo must be a string, bar must be a string');
 			});
 		});
 	});
