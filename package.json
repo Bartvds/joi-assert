@@ -1,6 +1,6 @@
 {
   "name": "joi-assert",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Assert values using Joi schemas",
   "keywords": [
     "joi",
