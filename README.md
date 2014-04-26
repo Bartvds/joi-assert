@@ -4,9 +4,11 @@
 
 > Assert values using Joi schemas
 
-Use [Spumko's Joi](https://github.com/spumko/joi) schemas in assertion statements that validate values and either return the validated value or throw an [AssertionError](https://github.com/chaijs/assertion-error) (with readable message). 
+Use Spumko's [Joi](https://github.com/spumko/joi) in assertion statements that validate values.
 
-This makes Joi schemas usable as input-assertions in user facing APIs, and as assertion library for use with frameworks like [mocha](https://visionmedia.github.io/mocha/). 
+Assertions return the validated value or throw an [AssertionError](https://github.com/chaijs/assertion-error) with a compact, readable message. 
+
+This makes Joi schemas usable as input-assertions in the methods of user facing APIs, and as assertion library for use with frameworks like [mocha](https://visionmedia.github.io/mocha/). 
 
 :warning: Early phase so users beware.
 
