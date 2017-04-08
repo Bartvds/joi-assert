@@ -6,7 +6,7 @@
 
 Use Spumko's [Joi](https://github.com/spumko/joi) in assertion statements that validate and sanitize values.
 
-Assertions throw an [AssertionError](https://github.com/chaijs/assertion-error) with a compact, readable message if validation fails. This makes Joi schemas usable in assertions for use with frameworks like [mocha](https://visionmedia.github.io/mocha/). 
+Assertions throw an [AssertionError](https://github.com/chaijs/assertion-error) with a compact, readable message if validation fails. This makes Joi schemas usable in assertions for use with frameworks like [mocha](http://mochajs.org/). 
 
 If validation succeeds the sanitized value returned, via Joi's support for default values and unknown property stripping etc. This makes Joi schemas usable as input-assertions in the methods of user facing methods of your modules and APIs.
 
